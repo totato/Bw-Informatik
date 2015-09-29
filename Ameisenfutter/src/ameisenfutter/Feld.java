@@ -24,4 +24,25 @@ public class Feld {
         this.isDuftstoffVerspruet = isDuftstoffVerspruet;
     }
 
+    /**
+     * Diese Methode verringert die Futterportion auf diesem Feld, solange 
+     * sie vorhanden ist. 
+     * Sie wird benutzt um die Portion zu verringern, sobald eine Ameise sich
+     * in diesem Feld befindet.
+     * 
+     */
+    public void portionAufheben() {
+        if (futterportion > 0) {
+            futterportion--;
+        }
+    }
+    
+    /**
+     * 
+     * 
+     */
+    public void versprueheDuft(){
+        isDuftstoffVerspruet = true;
+    }
+
 }
