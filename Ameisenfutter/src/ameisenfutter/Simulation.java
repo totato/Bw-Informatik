@@ -7,16 +7,16 @@ package ameisenfutter;
 
 /**
  *
- * @author Marc
+ * @author Vika
  */
-public class Ameisenfutter {
+public class Simulation {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-       new Simulation();
+    public Simulation() {
+        feldErzeugen(500, 50);
     }
-    
- 
+
+    private int[] feldErzeugen(int größe, int futterquellen) {
+        return null;
+
+    }
 }
