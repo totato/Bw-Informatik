@@ -70,7 +70,7 @@ public class GUI extends JPanel implements Runnable {
         setOpaque(false);
         setFocusable(true);
         t = new Thread(this);
-        t.start();
+        t.start();        
     }
 
     @Override
@@ -98,6 +98,7 @@ public class GUI extends JPanel implements Runnable {
     public void run() {
         while (true) {
             repaint();
+            s.los();
         }
 
     }

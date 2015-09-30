@@ -13,7 +13,7 @@ public class Feld {
 
     private int X; //X-Koordinate des Feldes innerhalb des zweidimensionalen Arrays
     private int Y; //Y-Koordinate des Feldes innerhalb des zweidimensionalen Arrays
-    private int isDuftstoffVerspruet; // gibt an, ob ein Feld mit Duftstoffen versehen wurde
+    private int DuftstoffEinheiten; // gibt an, mit wie viel Duftstoff ein Feld versehen wurde
     private int futterportion; // Anzahl der auf dem Feld liegenden Portion Futter
     private boolean nest; // gibt an, ob es sich um das Nest der Ameisen handelt
 
@@ -22,7 +22,7 @@ public class Feld {
         this.X = X;
         this.Y = Y;
         this.futterportion = futterportion;
-        this.isDuftstoffVerspruet = isDuftstoffVerspruet;
+        this.DuftstoffEinheiten = isDuftstoffVerspruet;
     }
 
     /**
@@ -42,12 +42,12 @@ public class Feld {
      * 
      * 
      */
-    public void versprueheDuft(){
-        isDuftstoffVerspruet = 10;
+    public void versprueheDuft(){ // brauchen wir nicht
+        DuftstoffEinheiten = 10;
     }
 
-    public int isIsDuftstoffVerspruet() {
-        return isDuftstoffVerspruet;
+    public int getDuftstoffEinheiten() {
+        return DuftstoffEinheiten;
     }
 
     public int getFutterportion() {
@@ -58,12 +58,15 @@ public class Feld {
         return nest;
     }
 
-    public void setIsDuftstoffVerspruet(int isDuftstoffVerspruet) {
-        this.isDuftstoffVerspruet = isDuftstoffVerspruet;
+    public void setDuftstoffEinheiten(int DuftstoffEinheiten) {
+        this.DuftstoffEinheiten = DuftstoffEinheiten;
     }
 
     public void setFutterportion(int futterportion) {
         this.futterportion = futterportion;
+    }
+     public void futterportionAbziehen() {
+        this.futterportion = futterportion-1;
     }
 
     public void setNest(boolean nest) {
