@@ -12,8 +12,8 @@ public class Ameise {
 
     public Ameise(boolean traegtFutter , int x , int y) {
         this.traegtFutter = false;
-        this.x = 0;
-        this.y = 0;
+        this.x = x;
+        this.y = y;
     }
 
     public boolean isTraegtFutter() {
