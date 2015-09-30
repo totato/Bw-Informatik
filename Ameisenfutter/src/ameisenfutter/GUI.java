@@ -57,7 +57,7 @@ public class GUI extends JPanel implements Runnable {
 
     public GUI() {
         JFrame frame = new JFrame();
-        frame.setMinimumSize(new Dimension(s.,));
+        //frame.setMinimumSize(new Dimension(s.,));
         frame.setLocationRelativeTo(null);
         frame.add(this);
         frame.setVisible(true);
