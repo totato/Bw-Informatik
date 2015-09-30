@@ -17,7 +17,7 @@ public class Feld {
     private int futterportion; // Anzahl der auf dem Feld liegenden Portion Futter
 
     //Konstruktor der Klasse Feld
-    public Feld(int X, int Y, boolean isDuftstoffVerspruet, int futterportion) {
+    public Feld( boolean isDuftstoffVerspruet, int futterportion) {
         this.X = X;
         this.Y = Y;
         this.futterportion = futterportion;

@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ameisenfutter;
 
 /**
  *
- * @author Vika
+ * @author Marc und Vika
  */
 public class Ameise {
-    
+
+    private boolean traegtFutter;
+
+    public Ameise(boolean traegtFutter) {
+        this.traegtFutter = false;
+    }
 }
