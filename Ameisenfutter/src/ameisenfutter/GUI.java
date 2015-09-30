@@ -22,6 +22,7 @@ public class GUI extends JPanel implements Runnable {
 
     private static Simulation s;
     private static int feldgroesse;
+    private final int feldpxl = 2;
     private Thread t;
 
     public static void main(String args[]) {
@@ -58,7 +59,7 @@ public class GUI extends JPanel implements Runnable {
 
     public GUI() {
         s = new Simulation();
-        feldgroesse = s.getFeldGroesse() * 2;
+        feldgroesse = s.getFeldGroesse() * feldpxl;
         JFrame frame = new JFrame();
         frame.setMinimumSize(new Dimension(feldgroesse, feldgroesse));
         frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,15 +79,22 @@ public class GUI extends JPanel implements Runnable {
         gr.setColor(new Color(4, 176, 24));
         gr.fillRect(0, 0, feldgroesse, feldgroesse);
         for (int i = 0; i < s.getGesamtAmeisen(); i++) {
-            gr.fillRect(i, i, i, i);
-            
+            gr.setColor(new Color(0, 0, 0));
+            gr.fillRect(s.getAmeisenKolonie()[i].getX()*feldpxl, s.getAmeisenKolonie()[i].getY()*feldpxl, 2, 2);
+        }
+        for (int i = 0; i < s.getGesamtAmeisen(); i++) {
+            gr.setColor(new Color(0, 0, 0));
+            gr.fillRect(s.getAmeisenKolonie()[i].getX()*feldpxl, s.getAmeisenKolonie()[i].getY()*feldpxl, 2, 2);
         }
         
     }
 
     @Override
     public void run() {
+        while(true){
         repaint();
+        }
+        
     }
 
 }
