@@ -58,9 +58,10 @@ public class GUI extends JPanel implements Runnable {
 
     public GUI() {
         s = new Simulation();
-        feldgroesse = s.getFeldGroesse();
+        feldgroesse = s.getFeldGroesse() * 2;
         JFrame frame = new JFrame();
         frame.setMinimumSize(new Dimension(feldgroesse, feldgroesse));
+        frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.add(this);
         frame.setVisible(true);
@@ -74,8 +75,9 @@ public class GUI extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        gr.setColor(Color.GREEN);
+        gr.setColor(new Color(4, 176, 24));
         gr.fillRect(0, 0, feldgroesse, feldgroesse);
+        
     }
 
     @Override
