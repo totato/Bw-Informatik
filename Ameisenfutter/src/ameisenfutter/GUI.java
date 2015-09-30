@@ -80,23 +80,25 @@ public class GUI extends JPanel implements Runnable {
         super.paintComponent(gr);
         gr.setColor(new Color(4, 176, 24));
         gr.fillRect(0, 0, feldgroesse, feldgroesse);
-        for (int i = 0; i < s.getGesamtAmeisen(); i++) {
-            gr.setColor(new Color(0, 0, 0));
-            gr.fillRect(s.getAmeisenKolonie()[i].getX() * feldpxl, s.getAmeisenKolonie()[i].getY() * feldpxl, 2, 2);
-        }
         for (int i = 0; i < s.getFeld().length; i++) {
             for (int j = 0; j < s.getFeld().length; j++) {
-                gr.setColor(new Color(142, 116, 46));
-                if (s.getFeld()[i][j].getFutterportion() > 0) {
-                    gr.fillRect(i * feldpxl, j * feldpxl, 2, 2);
-                }
                 gr.setColor(new Color(255, 255, 255));
                 if (s.getFeld()[i][j].getDuftstoffEinheiten() > 0) {
                     gr.fillRect(i * feldpxl, j * feldpxl, 2, 2);
                 }
+                gr.setColor(new Color(142, 116, 46));
+                if (s.getFeld()[i][j].getFutterportion() > 0) {
+                    gr.fillRect(i * feldpxl, j * feldpxl, 2, 2);
+                }
+                
 
             }
         }
+        for (int i = 0; i < s.getGesamtAmeisen(); i++) {
+            gr.setColor(new Color(0, 0, 0));
+            gr.fillRect(s.getAmeisenKolonie()[i].getX() * feldpxl, s.getAmeisenKolonie()[i].getY() * feldpxl, 2, 2);
+        }
+        
 
     }
 
