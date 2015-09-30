@@ -12,7 +12,7 @@ public class Simulation {
     
     private final int futterproQuelle = 50;
     private final int futterquellenproFeld = 5; // gemeint ist das 2D Array
-    private final int feldGroesse = 1000; // quadratisch
+    private final int feldGroesse = 500; // quadratisch
     private final int[] nestPosition = new int[2];
 
     public Simulation() {
@@ -67,10 +67,10 @@ public class Simulation {
 
     private void nachHause(Ameise ameise) {
         Random r = new Random();
-        if (r.nextInt(1) >= 0.5){
+        if (r.nextInt(1) >= 0.5 && ameise.getX() != nestPosition[0]){ // richtung x Koordinate
             
         }
-        else{
+        else{ // richtung y Koordinate
             
         }
     }
