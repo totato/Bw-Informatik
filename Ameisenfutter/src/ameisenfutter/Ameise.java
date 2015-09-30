@@ -11,4 +11,14 @@ public class Ameise {
     public Ameise(boolean traegtFutter) {
         this.traegtFutter = false;
     }
+
+    public boolean isTraegtFutter() {
+        return traegtFutter;
+    }
+
+    public void setTraegtFutter(boolean traegtFutter) {
+        this.traegtFutter = traegtFutter;
+    }
+    
+    
 }

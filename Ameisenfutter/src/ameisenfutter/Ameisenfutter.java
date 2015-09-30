@@ -12,7 +12,7 @@ public class Ameisenfutter {
      */
     public static void main(String[] args) {
        new Simulation();
-       int[][] i = new int[50][10];
+      
     }
     
  
