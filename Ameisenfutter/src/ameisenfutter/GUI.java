@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 public class GUI extends JPanel implements Runnable {
 
     private static Simulation s;
+    private static int feldgroesse;
+    private Thread t;
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -49,32 +51,36 @@ public class GUI extends JPanel implements Runnable {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                s = new Simulation();
                 new GUI().setVisible(true);
             }
         });
     }
 
     public GUI() {
+        s = new Simulation();
+        feldgroesse = s.getFeldGroesse();
         JFrame frame = new JFrame();
-        //frame.setMinimumSize(new Dimension(s.,));
+        frame.setMinimumSize(new Dimension(feldgroesse, feldgroesse));
         frame.setLocationRelativeTo(null);
         frame.add(this);
         frame.setVisible(true);
         frame.setResizable(false);
         setOpaque(false);
         setFocusable(true);
+        t = new Thread(this);
+        t.start();
     }
 
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-
+        gr.setColor(Color.GREEN);
+        gr.fillRect(0, 0, feldgroesse, feldgroesse);
     }
 
     @Override
     public void run() {
-
+        repaint();
     }
 
 }
