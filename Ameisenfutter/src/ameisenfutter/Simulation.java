@@ -21,7 +21,7 @@ public class Simulation {
         // Feld wird gefüllt, erst nur 'leere' Feld Objekte
         for (int i = 0; i < groesse; i++) {
             for (int j = 0; j < groesse; j++) {
-                feld[i][j] = new Feld(false, 0, false);
+                feld[i][j] = new Feld(0, 0, false);
 
             }
 
