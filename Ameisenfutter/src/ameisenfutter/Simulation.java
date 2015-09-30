@@ -41,19 +41,18 @@ public class Simulation {
             }
             // eine Runde - jede Ameise macht einen Zug
             for (int i = 0; i < ameisenKolonie.length; i++) {
-                Ameise aktAmeise = ameisenKolonie[i];
-                Feld aktFeld = feld[aktAmeise.getX()][aktAmeise.getY()];
+                Feld aktFeld = feld[ameisenKolonie[i].getX()][ameisenKolonie[i].getY()];
 
-                if (!aktAmeise.isTraegtFutter() && aktFeld.getFutterportion() > 0) {
-                    futterAufnehmen(aktAmeise);
+                if (!ameisenKolonie[i].isTraegtFutter() && aktFeld.getFutterportion() > 0) {
+                    futterAufnehmen(ameisenKolonie[i]);
                     duftstoffVerspruehen(aktFeld);
-                } else if (aktAmeise.isTraegtFutter() && aktFeld.isNest()) {
-                    futterAblegen(aktAmeise);
-                } else if (aktAmeise.isTraegtFutter()) {
-                    nachHause(aktAmeise);
+                } else if (ameisenKolonie[i].isTraegtFutter() && aktFeld.isNest()) {
+                    futterAblegen(ameisenKolonie[i]);
+                } else if (ameisenKolonie[i].isTraegtFutter()) {
+                    nachHause(ameisenKolonie[i]);
                     duftstoffVerspruehen(aktFeld);
                 } else {
-                    futtersuche(aktAmeise);
+                    futtersuche(ameisenKolonie[i]);
                 }
            // }
 
