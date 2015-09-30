@@ -102,7 +102,7 @@ public class GUI extends JPanel implements Runnable {
             repaint();
             s.los();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(0);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }

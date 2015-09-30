@@ -158,7 +158,7 @@ public class Simulation {
 
     private void nachHause(Ameise ameise) {
         Random r = new Random();
-        if (r.nextInt(1) >= 0.5 && ameise.getX() != nestPosition[0]) { // richtung x Koordinate
+        if (r.nextInt(2) >= 0.5 && ameise.getX() != nestPosition[0]) { // richtung x Koordinate
             if (nestPosition[0] < ameise.getX()) {
                 ameise.setX(ameise.getX() - 1);
             } else {
