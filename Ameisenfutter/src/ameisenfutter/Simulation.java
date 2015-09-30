@@ -14,7 +14,7 @@ public class Simulation {
     private final int futterproQuelle = 50;
     private final int futterquellenaufFeld = 5; // gemeint ist das 2D Array
     private final int feldGroesse = 500; // quadratisch
-    private int duftstoffZeit = 25;
+    private int duftstoffZeit = 500;
     private final int[] nestPosition = new int[2];
     private Feld[][] feld;
     private int futterImNest = 0;
