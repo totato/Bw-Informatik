@@ -12,7 +12,7 @@ public class Simulation {
     
     private final int futterproQuelle = 50;
     private final int futterquellenproFeld = 5; // gemeint ist das 2D Array
-    private final int feldGroesse = 500; // quadratisch
+    private final int feldGroesse = 1000; // quadratisch
     private final int[] nestPosition = new int[2];
 
     public Simulation() {
@@ -37,10 +37,10 @@ public class Simulation {
         // Futterstellen werden zufällig verteielt
         Random r = new Random();
         for (int i = 0; i < futterquellen; i++) {
-            int a = r.nextInt(groesse + 1);
-            int b = r.nextInt(groesse + 1);
-            if (feld[a][b].getFutterportion() <= 0 && !feld[a][b].isNest()) {
-                feld[a][b].setFutterportion(futterproQuelle);
+            int x = r.nextInt(groesse + 1);
+            int y = r.nextInt(groesse + 1);
+            if (feld[x][y].getFutterportion() <= 0 && !feld[x][y].isNest()) {
+                feld[x][y].setFutterportion(futterproQuelle);
 
             }
 
@@ -49,18 +49,30 @@ public class Simulation {
 
     }
 
+    /*
+    Erzeugt die Ameisen
+    */
     private Ameise[] ameisenSpawnen (int anzahl){
         Ameise[] ameisen = new Ameise[anzahl];
-        return null;
+        for (int i = 0; i < anzahl; i++) {
+            ameisen[i] = new Ameise(false,nestPosition[0],nestPosition[1]);
+        }
+        return ameisen;
         
     }
     
-    private void futtersuche() {
+    private void futtersuche(Ameise ameise) {
 
     }
 
-    private void nachHause() {
+    private void nachHause(Ameise ameise) {
         Random r = new Random();
+        if (r.nextInt(1) >= 0.5){
+            
+        }
+        else{
+            
+        }
     }
 
     public int getGesamtAmeisen() {
