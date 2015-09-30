@@ -23,42 +23,40 @@ public class Simulation {
         feldErzeugen(feldGroesse, futterquellenaufFeld);
         ameisenSpawnen(gesamtAmeisen);
 
-
-
     }
 
-    public void los(){
-          //   while (futterImNest < futterproQuelle * futterquellenaufFeld) {
-            // Duftstoffe verschwinden mit jedem Durchlauf
-            for (int i = 0; i < feld.length; i++) {
-                for (int j = 0; j < feld.length; j++) {
-                    if (feld[i][j].getDuftstoffEinheiten() > 0) {
-                        feld[i][j].setDuftstoffEinheiten(feld[i][j].getDuftstoffEinheiten() - 1);
-                    }
-
+    public void los() {
+        //   while (futterImNest < futterproQuelle * futterquellenaufFeld) {
+        // Duftstoffe verschwinden mit jedem Durchlauf
+        for (int i = 0; i < feld.length; i++) {
+            for (int j = 0; j < feld.length; j++) {
+                if (feld[i][j].getDuftstoffEinheiten() > 0) {
+                    feld[i][j].setDuftstoffEinheiten(feld[i][j].getDuftstoffEinheiten() - 1);
                 }
 
             }
-            // eine Runde - jede Ameise macht einen Zug
-            for (int i = 0; i < ameisenKolonie.length; i++) {
-                Feld aktFeld = feld[ameisenKolonie[i].getX()][ameisenKolonie[i].getY()];
 
-                if (!ameisenKolonie[i].isTraegtFutter() && aktFeld.getFutterportion() > 0) {
-                    futterAufnehmen(ameisenKolonie[i]);
-                    duftstoffVerspruehen(aktFeld);
-                } else if (ameisenKolonie[i].isTraegtFutter() && aktFeld.isNest()) {
-                    futterAblegen(ameisenKolonie[i]);
-                } else if (ameisenKolonie[i].isTraegtFutter()) {
-                    nachHause(ameisenKolonie[i]);
-                    duftstoffVerspruehen(aktFeld);
-                } else {
-                    futtersuche(ameisenKolonie[i]);
-                }
-           // }
+        }
+        // eine Runde - jede Ameise macht einen Zug
+        for (int i = 0; i < ameisenKolonie.length; i++) {
+            Feld aktFeld = feld[ameisenKolonie[i].getX()][ameisenKolonie[i].getY()];
 
-        }   
+            if (!ameisenKolonie[i].isTraegtFutter() && aktFeld.getFutterportion() > 0) {
+                futterAufnehmen(ameisenKolonie[i]);
+                duftstoffVerspruehen(aktFeld);
+            } else if (ameisenKolonie[i].isTraegtFutter() && aktFeld.isNest()) {
+                futterAblegen(ameisenKolonie[i]);
+            } else if (ameisenKolonie[i].isTraegtFutter()) {
+                nachHause(ameisenKolonie[i]);
+                duftstoffVerspruehen(aktFeld);
+            } else {
+                futtersuche(ameisenKolonie[i]);
+            }
+            // }
+
+        }
     }
-    
+
     private void feldErzeugen(int groesse, int futterquellen) {
         feld = new Feld[groesse][groesse];
         // Feld wird gefüllt, erst nur 'leere' Feld Objekte
@@ -104,22 +102,31 @@ public class Simulation {
         int x = 0;
         int y = 0;
         boolean gefunden = false;
+        boolean k = false;
         for (int i = ameise.getX() - 1; i < ameise.getX() + 1; i++) { // 3 , da 3x3 Feld überprüft wird 
             if (i >= 0 && i < feld.length) {
                 for (int j = ameise.getY() - 1; j < ameise.getY() + 1; j++) {
-                    if(j >= 0 && j < feld.length){
-                    if (feld[i][j].getDuftstoffEinheiten() > 0 ) { // damit sich die Ameise auch in die richtige Richtung bewegt
-                        x = i;
-                        y = j;
-                        ameise.setX(x);
-                        ameise.setY(y);
-                        gefunden = true;
-                    }
-                    }
+                    if (j >= 0 && j < feld.length){
 
+                     if (feld[i][j].getDuftstoffEinheiten() > 0) { // damit sich die Ameise auch in die richtige Richtung bewegt
+                        if (!k) {
+                            x = i;
+                            y = j;
+                        }
+                        else if((Math.abs(i - nestPosition[0]) > Math.abs(x - nestPosition[0]) || Math.abs(j - nestPosition[1]) > Math.abs(y - nestPosition[1]))){
+                            x = i;
+                            y = j;
+                            ameise.setX(x);
+                            ameise.setY(y);
+                            gefunden = true;
+                        }
+                        
+                    }
+                    }
+                
                     if (!gefunden) { // wenn Kein Duftpunkt gefunden wurde 
 // es wird eine zufällige Koordinate zufällig um eins erhöht oder gesenkt
-                        Random r = new Random();  
+                        Random r = new Random();
                         if (r.nextInt(2) >= 0.5) {
                             if (r.nextInt(2) >= 0.5) {
                                 if (ameise.getX() + 1 < feld.length) {
@@ -145,7 +152,6 @@ public class Simulation {
                         } else {
                             ameise.setY(ameise.getY() + 1);
                         }
-                        
 
                     }
 
@@ -181,7 +187,7 @@ public class Simulation {
     private void futterAblegen(Ameise ameise) {
         ameise.setTraegtFutter(false);
         futterImNest++;
-        System.out.println("Futter im Nest = " + futterImNest );
+        System.out.println("Futter im Nest = " + futterImNest);
     }
 
     private void duftstoffVerspruehen(Feld feld) {
