@@ -77,6 +77,10 @@ public class GUI extends JPanel implements Runnable {
         super.paintComponent(gr);
         gr.setColor(new Color(4, 176, 24));
         gr.fillRect(0, 0, feldgroesse, feldgroesse);
+        for (int i = 0; i < s.getGesamtAmeisen(); i++) {
+            gr.fillRect(i, i, i, i);
+            
+        }
         
     }
 
