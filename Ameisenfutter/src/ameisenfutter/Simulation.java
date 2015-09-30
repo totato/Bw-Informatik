@@ -14,7 +14,7 @@ public class Simulation {
     private final int futterproQuelle = 50;
     private final int futterquellenaufFeld = 5; // gemeint ist das 2D Array
     private final int feldGroesse = 500; // quadratisch
-    private int duftstoffZeit = 500;
+    private int duftstoffZeit = 5000;
     private final int[] nestPosition = new int[2];
     private Feld[][] feld;
     private int futterImNest = 0;
@@ -108,7 +108,7 @@ public class Simulation {
             if (i >= 0 && i < feld.length) {
                 for (int j = ameise.getY() - 1; j < ameise.getY() + 1; j++) {
                     if(j >= 0 && j < feld.length){
-                    if (feld[i][j].getDuftstoffEinheiten() > 0 && (Math.abs(i - nestPosition[0]) > Math.abs(x - nestPosition[0]) || Math.abs(j - nestPosition[1]) > Math.abs(y - nestPosition[1]))) { // damit sich die Ameise auch in die richtige Richtung bewegt
+                    if (feld[i][j].getDuftstoffEinheiten() > 0 ) { // damit sich die Ameise auch in die richtige Richtung bewegt
                         x = i;
                         y = j;
                         ameise.setX(x);
