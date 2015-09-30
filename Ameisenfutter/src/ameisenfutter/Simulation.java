@@ -8,12 +8,16 @@ import java.util.Random;
  */
 public class Simulation {
 
+    private final int gesamtAmeisen = 100;
+    
     private final int futterproQuelle = 50;
     private final int futterquellenproFeld = 5; // gemeint ist das 2D Array
     private final int feldGroesse = 500; // quadratisch
+    private final int[] nestPosition = new int[2];
 
     public Simulation() {
         feldErzeugen(feldGroesse, futterquellenproFeld);
+        ameisenSpawnen(gesamtAmeisen);
     }
 
     private Feld[][] feldErzeugen(int groesse, int futterquellen) {
@@ -28,7 +32,8 @@ public class Simulation {
         }
         // Nest wird in die Mitte gesetzt
         feld[groesse / 2][groesse / 2].setNest(true);
-
+        nestPosition[0] = groesse / 2;
+        nestPosition[1] = groesse / 2;
         // Futterstellen werden zufällig verteielt
         Random r = new Random();
         for (int i = 0; i < futterquellen; i++) {
@@ -36,15 +41,39 @@ public class Simulation {
             int b = r.nextInt(groesse + 1);
             if (feld[a][b].getFutterportion() <= 0 && !feld[a][b].isNest()) {
                 feld[a][b].setFutterportion(futterproQuelle);
+
             }
 
         }
         return feld;
 
     }
-    
-    private void bewegen (){
-        
+
+    private Ameise[] ameisenSpawnen (int anzahl){
+        Ameise[] ameisen = new Ameise[anzahl];
+        return null;
         
     }
+    
+    private void futtersuche() {
+
+    }
+
+    private void nachHause() {
+        Random r = new Random();
+    }
+
+    public int getGesamtAmeisen() {
+        return gesamtAmeisen;
+    }
+
+    public int getFeldGroesse() {
+        return feldGroesse;
+    }
+
+    public int[] getNestPosition() {
+        return nestPosition;
+    }
+    
+    
 }
