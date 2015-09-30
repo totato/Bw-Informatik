@@ -80,21 +80,26 @@ public class GUI extends JPanel implements Runnable {
         gr.fillRect(0, 0, feldgroesse, feldgroesse);
         for (int i = 0; i < s.getGesamtAmeisen(); i++) {
             gr.setColor(new Color(0, 0, 0));
-            gr.fillRect(s.getAmeisenKolonie()[i].getX()*feldpxl, s.getAmeisenKolonie()[i].getY()*feldpxl, 2, 2);
+            gr.fillRect(s.getAmeisenKolonie()[i].getX() * feldpxl, s.getAmeisenKolonie()[i].getY() * feldpxl, 2, 2);
         }
-        for (int i = 0; i < s.getGesamtAmeisen(); i++) {
-            gr.setColor(new Color(0, 0, 0));
-            gr.fillRect(s.getAmeisenKolonie()[i].getX()*feldpxl, s.getAmeisenKolonie()[i].getY()*feldpxl, 2, 2);
+        for (int i = 0; i < s.getFeld().length; i++) {
+            for (int j = 0; j < s.getFeld().length; j++) {
+                gr.setColor(new Color(142, 116, 46));
+                if (s.getFeld()[i][j].getFutterportion() > 0) {
+                    gr.fillRect(i * feldpxl, j * feldpxl, 2, 2);
+                }
+
+            }
         }
-        
+
     }
 
     @Override
     public void run() {
-        while(true){
-        repaint();
+        while (true) {
+            repaint();
         }
-        
+
     }
 
 }
