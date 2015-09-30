@@ -90,6 +90,10 @@ public class GUI extends JPanel implements Runnable {
                 if (s.getFeld()[i][j].getFutterportion() > 0) {
                     gr.fillRect(i * feldpxl, j * feldpxl, 2, 2);
                 }
+                gr.setColor(new Color(255, 255, 255));
+                if (s.getFeld()[i][j].getDuftstoffEinheiten() > 0) {
+                    gr.fillRect(i * feldpxl, j * feldpxl, 2, 2);
+                }
 
             }
         }
@@ -102,7 +106,7 @@ public class GUI extends JPanel implements Runnable {
             repaint();
             s.los();
             try {
-                Thread.sleep(0);
+                Thread.sleep(1);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
