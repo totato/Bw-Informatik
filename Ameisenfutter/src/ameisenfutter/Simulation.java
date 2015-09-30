@@ -119,9 +119,9 @@ public class Simulation {
 
                     if (!gefunden) { // wenn Kein Duftpunkt gefunden wurde 
 // es wird eine zufällige Koordinate zufällig um eins erhöht oder gesenkt
-                        Random r = new Random();
-                        if (r.nextInt(1) >= 0.5) {
-                            if (r.nextInt(1) >= 0.5) {
+                        Random r = new Random();  
+                        if (r.nextInt(2) >= 0.5) {
+                            if (r.nextInt(2) >= 0.5) {
                                 if (ameise.getX() + 1 < feld.length) {
                                     ameise.setX(ameise.getX() + 1);
                                 } else {
@@ -134,7 +134,7 @@ public class Simulation {
                             } else {
                                 ameise.setX(ameise.getX() + 1);
                             }
-                        } else if (r.nextInt(1) >= 0.5) {
+                        } else if (r.nextInt(2) >= 0.5) {
                             if (ameise.getY() + 1 < feld.length) {
                                 ameise.setY(ameise.getY() + 1);
                             } else {
@@ -145,6 +145,7 @@ public class Simulation {
                         } else {
                             ameise.setY(ameise.getY() + 1);
                         }
+                        
 
                     }
 
