@@ -9,6 +9,7 @@ import java.util.Random;
 public class Simulation {
 
     private final int gesamtAmeisen = 100;
+    private Ameise[] ameisenKolonie ;
     
     private final int futterproQuelle = 50;
     private final int futterquellenproFeld = 5; // gemeint ist das 2D Array
@@ -53,11 +54,11 @@ public class Simulation {
     Erzeugt die Ameisen
     */
     private Ameise[] ameisenSpawnen (int anzahl){
-        Ameise[] ameisen = new Ameise[anzahl];
+        ameisenKolonie = new Ameise[anzahl];
         for (int i = 0; i < anzahl; i++) {
-            ameisen[i] = new Ameise(false,nestPosition[0],nestPosition[1]);
+            ameisenKolonie[i] = new Ameise(false,nestPosition[0],nestPosition[1]);
         }
-        return ameisen;
+        return ameisenKolonie;
         
     }
     
@@ -68,9 +69,11 @@ public class Simulation {
     private void nachHause(Ameise ameise) {
         Random r = new Random();
         if (r.nextInt(1) >= 0.5 && ameise.getX() != nestPosition[0]){ // richtung x Koordinate
-            
+            if( nestPosition[0] < ameise.getX()){
+                ameise.setX(ameise.getX()-1);
+            }
         }
-        else{ // richtung y Koordinate
+        else if(ameise.getY() != nestPosition[1]){ // richtung y Koordinate
             
         }
     }
@@ -85,6 +88,10 @@ public class Simulation {
 
     public int[] getNestPosition() {
         return nestPosition;
+    }
+
+    public Ameise[] getAmeisenKolonie() {
+        return ameisenKolonie;
     }
     
     
