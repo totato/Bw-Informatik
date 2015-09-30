@@ -7,9 +7,13 @@ package ameisenfutter;
 public class Ameise {
 
     private boolean traegtFutter;
+    private int x;
+    private int y;
 
-    public Ameise(boolean traegtFutter) {
+    public Ameise(boolean traegtFutter , int x , int y) {
         this.traegtFutter = false;
+        this.x = 0;
+        this.y = 0;
     }
 
     public boolean isTraegtFutter() {
@@ -18,6 +22,22 @@ public class Ameise {
 
     public void setTraegtFutter(boolean traegtFutter) {
         this.traegtFutter = traegtFutter;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
     
     

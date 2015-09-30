@@ -18,7 +18,7 @@ public class Feld {
     private boolean nest; // gibt an, ob es sich um das Nest der Ameisen handelt
 
     //Konstruktor der Klasse Feld
-    public Feld( int isDuftstoffVerspruet, int futterportion, boolean nest) {
+    public Feld( int isDuftstoffVerspruet, int futterportion, boolean nest ) {
         this.X = X;
         this.Y = Y;
         this.futterportion = futterportion;
