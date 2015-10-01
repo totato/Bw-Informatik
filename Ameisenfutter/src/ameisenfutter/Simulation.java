@@ -99,27 +99,22 @@ public class Simulation {
     private void futtersuche(Ameise ameise) {
         // prüfen ob Duftpunkte in der Nähe, wenn ja geht es zu dem welches weiter vom Nest entfernt ist
 
-        int x = 0;
-        int y = 0;
+        int x = ameise.getX();
+        int y = ameise.getY();
         boolean gefunden = false;
-        boolean k = false;
         for (int i = ameise.getX() - 1; i < ameise.getX() + 1; i++) { // 3 , da 3x3 Feld überprüft wird 
             if (i >= 0 && i < feld.length) {
                 for (int j = ameise.getY() - 1; j < ameise.getY() + 1; j++) {
                     if (j >= 0 && j < feld.length) {
 
-                        if (feld[i][j].getDuftstoffEinheiten() > 0) { // damit sich die Ameise auch in die richtige Richtung bewegt
-                            if (!k) {
-                                x = i;
-                                y = j;
-                            } else if ((Math.abs(i - nestPosition[0]) > Math.abs(x - nestPosition[0]) || Math.abs(j - nestPosition[1]) > Math.abs(y - nestPosition[1]))) {
-                                x = i;
-                                y = j;
-                                ameise.setX(x);
-                                ameise.setY(y);
-                                gefunden = true;
-                            }
-
+                        if (feld[i][j].getDuftstoffEinheiten() > 0 && feld[i][j] != feld[ameise.getX()][ameise.getY()]) { // damit sich die Ameise auch in die richtige Richtung bewegt
+                         if ((Math.abs(i - nestPosition[0]) > Math.abs(x - nestPosition[0]) || Math.abs(j - nestPosition[1]) > Math.abs(y - nestPosition[1]))) {
+                            x = i;
+                            y = j;
+                            ameise.setX(x);
+                            ameise.setY(y);
+                            gefunden = true;
+                        }
                         }
                     }
 
@@ -129,49 +124,49 @@ public class Simulation {
                         //Marc's idee des
                         int zahl = r.nextInt(4);
                         if (zahl > 1) {
-                            
-                            if (zahl == 2 && ameise.getX() + 1 < feld.length){
+
+                            if (zahl == 2 && ameise.getX() + 1 < feld.length) {
                                 ameise.setX(ameise.getX() + 1);
-                            } else if (ameise.getX() - 1 > 0){
+                            } else if (ameise.getX() - 1 > 0) {
                                 ameise.setX(ameise.getX() - 1);
                             }
-                            
+
                         } else {
-                            
-                            if (zahl == 0 && ameise.getY() + 1 < feld.length){
+
+                            if (zahl == 0 && ameise.getY() + 1 < feld.length) {
                                 ameise.setY(ameise.getY() + 1);
-                            } else if (ameise.getY() - 1 > 0){
+                            } else if (ameise.getY() - 1 > 0) {
                                 ameise.setY(ameise.getY() - 1);
                             }
-                        
-                        }
-/*
-                        if (r.nextInt(2) >= 0.5) {
-                            if (r.nextInt(2) >= 0.5) {
-                                if (ameise.getX() + 1 < feld.length) {
-                                    ameise.setX(ameise.getX() + 1);
-                                } else {
-                                    ameise.setX(ameise.getX() - 1);
-                                }
 
-                            } else if (ameise.getX() - 1 >= 0) {
-                                ameise.setX(ameise.getX() - 1);
-
-                            } else {
-                                ameise.setX(ameise.getX() + 1);
-                            }
-                        } else if (r.nextInt(2) >= 0.5) {
-                            if (ameise.getY() + 1 < feld.length) {
-                                ameise.setY(ameise.getY() + 1);
-                            } else {
-                                ameise.setY(ameise.getY() - 1);
-                            }
-                        } else if (ameise.getY() - 1 >= 0) {
-                            ameise.setY(ameise.getY() - 1);
-                        } else {
-                            ameise.setY(ameise.getY() + 1);
                         }
-*/
+                        /*
+                         if (r.nextInt(2) >= 0.5) {
+                         if (r.nextInt(2) >= 0.5) {
+                         if (ameise.getX() + 1 < feld.length) {
+                         ameise.setX(ameise.getX() + 1);
+                         } else {
+                         ameise.setX(ameise.getX() - 1);
+                         }
+
+                         } else if (ameise.getX() - 1 >= 0) {
+                         ameise.setX(ameise.getX() - 1);
+
+                         } else {
+                         ameise.setX(ameise.getX() + 1);
+                         }
+                         } else if (r.nextInt(2) >= 0.5) {
+                         if (ameise.getY() + 1 < feld.length) {
+                         ameise.setY(ameise.getY() + 1);
+                         } else {
+                         ameise.setY(ameise.getY() - 1);
+                         }
+                         } else if (ameise.getY() - 1 >= 0) {
+                         ameise.setY(ameise.getY() - 1);
+                         } else {
+                         ameise.setY(ameise.getY() + 1);
+                         }
+                         */
                     }
 
                 }
