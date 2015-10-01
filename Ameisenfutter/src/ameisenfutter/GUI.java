@@ -72,7 +72,7 @@ public class GUI extends JPanel implements Runnable {
         setOpaque(false);
         setFocusable(true);
         t = new Thread(this);
-        t.start();        
+        t.start();
     }
 
     @Override
@@ -90,7 +90,6 @@ public class GUI extends JPanel implements Runnable {
                 if (s.getFeld()[i][j].getFutterportion() > 0) {
                     gr.fillRect(i * feldpxl, j * feldpxl, 2, 2);
                 }
-                
 
             }
         }
@@ -98,15 +97,21 @@ public class GUI extends JPanel implements Runnable {
             gr.setColor(new Color(0, 0, 0));
             gr.fillRect(s.getAmeisenKolonie()[i].getX() * feldpxl, s.getAmeisenKolonie()[i].getY() * feldpxl, 2, 2);
         }
-        
 
     }
 
     @Override
     public void run() {
+        int runden = 1;
+        long mill = 0;
         while (true) {
+            long l = System.currentTimeMillis();
             repaint();
             s.los();
+            mill = mill +(System.currentTimeMillis() - l);
+            double xs = mill/runden;
+            System.out.println(xs + " = " + mill + " / " + runden);
+            runden++;
             try {
                 Thread.sleep(1);
             } catch (InterruptedException ex) {
