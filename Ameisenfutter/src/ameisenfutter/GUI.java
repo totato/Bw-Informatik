@@ -113,7 +113,7 @@ public class GUI extends JPanel implements Runnable {
             //System.out.println(xs + " = " + mill + " / " + runden);
             runden++;
             try {
-                Thread.sleep(1);
+                Thread.sleep(0);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }

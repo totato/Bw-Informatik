@@ -14,7 +14,7 @@ public class Simulation {
     private final int futterproQuelle = 50;
     private final int futterquellenaufFeld = 5; // gemeint ist das 2D Array
     private final int feldGroesse = 500; // quadratisch
-    private int duftstoffZeit = 5000;
+    private int duftstoffZeit = 1500;
     private final int[] nestPosition = new int[2];
     private Feld[][] feld;
     private int futterImNest = 0;
@@ -43,12 +43,12 @@ public class Simulation {
 
             if (!ameisenKolonie[i].isTraegtFutter() && aktFeld.getFutterportion() > 0) {
                 futterAufnehmen(ameisenKolonie[i]);
-                duftstoffVerspruehen(aktFeld);
+              //  duftstoffVerspruehen(aktFeld);
             } else if (ameisenKolonie[i].isTraegtFutter() && aktFeld.isNest()) {
                 futterAblegen(ameisenKolonie[i]);
             } else if (ameisenKolonie[i].isTraegtFutter()) {
                 nachHause(ameisenKolonie[i]);
-                duftstoffVerspruehen(aktFeld);
+                //duftstoffVerspruehen(aktFeld);
             } else {
                 futtersuche(ameisenKolonie[i]);
             }
@@ -73,11 +73,12 @@ public class Simulation {
         nestPosition[1] = groesse / 2;
         // Futterstellen werden zufällig verteielt
         Random r = new Random();
-        for (int i = 0; i < futterquellen; i++) {
-            int x = r.nextInt(groesse + 1);
-            int y = r.nextInt(groesse + 1);
+        while (0 < futterquellen) {
+            int x = r.nextInt(groesse);
+            int y = r.nextInt(groesse);
             if (feld[x][y].getFutterportion() <= 0 && !feld[x][y].isNest()) {
                 feld[x][y].setFutterportion(futterproQuelle);
+                futterquellen--;
 
             }
 
@@ -102,94 +103,152 @@ public class Simulation {
         int x = ameise.getX();
         int y = ameise.getY();
         boolean gefunden = false;
-        for (int i = ameise.getX() - 1; i < ameise.getX() + 1; i++) { // 3 , da 3x3 Feld überprüft wird 
+        for (int i = ameise.getX() - 1; i <= ameise.getX() + 1; i++) { // 3 , da 3x3 Feld überprüft wird 
             if (i >= 0 && i < feld.length) {
-                for (int j = ameise.getY() - 1; j < ameise.getY() + 1; j++) {
+                for (int j = ameise.getY() - 1; j <= ameise.getY() + 1; j++) {
                     if (j >= 0 && j < feld.length) {
 
+                        /*if (feld[i][j].getDuftstoffEinheiten() > feld[x][y].getDuftstoffEinheiten() && feld[ameise.getX()][ameise.getY()].getDuftstoffEinheiten() <= 0) { // damit sich die Ameise auch in die richtige Richtung bewegt
+
+                         x = i;
+                         y = j;
+                         gefunden = true;
+                         } else if (feld[i][j].getDuftstoffEinheiten() < feld[x][y].getDuftstoffEinheiten()&& feld[i][j].getDuftstoffEinheiten() > 0 && feld[ameise.getX()][ameise.getY()].getDuftstoffEinheiten() > 0) {
+                         x = i;
+                         y = j;
+                         gefunden = true;
+                         }*/
                         if (feld[i][j].getDuftstoffEinheiten() > 0 && feld[i][j] != feld[ameise.getX()][ameise.getY()]) { // damit sich die Ameise auch in die richtige Richtung bewegt
-                         if ((Math.abs(i - nestPosition[0]) > Math.abs(x - nestPosition[0]) || Math.abs(j - nestPosition[1]) > Math.abs(y - nestPosition[1]))) {
-                            x = i;
-                            y = j;
-                            ameise.setX(x);
-                            ameise.setY(y);
-                            gefunden = true;
-                        }
-                        }
-                    }
-
-                    if (!gefunden) { // wenn Kein Duftpunkt gefunden wurde 
-// es wird eine zufällige Koordinate zufällig um eins erhöht oder gesenkt
-                        Random r = new Random();
-                        //Marc's idee des
-                        int zahl = r.nextInt(4);
-                        if (zahl > 1) {
-
-                            if (zahl == 2 && ameise.getX() + 1 < feld.length) {
-                                ameise.setX(ameise.getX() + 1);
-                            } else if (ameise.getX() - 1 > 0) {
-                                ameise.setX(ameise.getX() - 1);
-                            }
-
-                        } else {
-
-                            if (zahl == 0 && ameise.getY() + 1 < feld.length) {
-                                ameise.setY(ameise.getY() + 1);
-                            } else if (ameise.getY() - 1 > 0) {
-                                ameise.setY(ameise.getY() - 1);
+                            if (feld[ameise.getX()][ameise.getY()].getDuftstoffEinheiten() <= 0) {
+                                x = i;
+                                y = j;
+                                gefunden = true;
+                            } else if (feld[i][j].getDuftstoffEinheiten() < feld[ameise.getX()][ameise.getY()].getDuftstoffEinheiten()) {
+                                x = i;
+                                y = j;
+                                gefunden = true;
                             }
 
                         }
-                        /*
-                         if (r.nextInt(2) >= 0.5) {
-                         if (r.nextInt(2) >= 0.5) {
-                         if (ameise.getX() + 1 < feld.length) {
-                         ameise.setX(ameise.getX() + 1);
-                         } else {
-                         ameise.setX(ameise.getX() - 1);
-                         }
 
-                         } else if (ameise.getX() - 1 >= 0) {
-                         ameise.setX(ameise.getX() - 1);
-
-                         } else {
-                         ameise.setX(ameise.getX() + 1);
-                         }
-                         } else if (r.nextInt(2) >= 0.5) {
-                         if (ameise.getY() + 1 < feld.length) {
-                         ameise.setY(ameise.getY() + 1);
-                         } else {
-                         ameise.setY(ameise.getY() - 1);
-                         }
-                         } else if (ameise.getY() - 1 >= 0) {
-                         ameise.setY(ameise.getY() - 1);
-                         } else {
-                         ameise.setY(ameise.getY() + 1);
-                         }
-                         */
                     }
-
                 }
             }
+        }
+        if (gefunden) {
+            ameise.setX(x);
+            ameise.setY(y);
+        }
 
+        if (!gefunden) { // wenn Kein Duftpunkt gefunden wurde 
+// es wird eine zufällige Koordinate zufällig um eins erhöht oder gesenkt
+            Random r = new Random();
+            //Marc's idee des
+            int zahl = r.nextInt(4);
+            if (zahl > 1) {
+
+                if (zahl == 2 && ameise.getX() + 1 < feld.length) {
+                    ameise.setX(ameise.getX() + 1);
+                } else if (ameise.getX() - 1 > 0) {
+                    ameise.setX(ameise.getX() - 1);
+                }
+
+            } else {
+
+                if (zahl == 0 && ameise.getY() + 1 < feld.length) {
+                    ameise.setY(ameise.getY() + 1);
+                } else if (ameise.getY() - 1 > 0) {
+                    ameise.setY(ameise.getY() - 1);
+                }
+
+            }
+            /*
+             if (r.nextInt(2) >= 0.5) {
+             if (r.nextInt(2) >= 0.5) {
+             if (ameise.getX() + 1 < feld.length) {
+             ameise.setX(ameise.getX() + 1);
+             } else {
+             ameise.setX(ameise.getX() - 1);
+             }
+
+             } else if (ameise.getX() - 1 >= 0) {
+             ameise.setX(ameise.getX() - 1);
+
+             } else {
+             ameise.setX(ameise.getX() + 1);
+             }
+             } else if (r.nextInt(2) >= 0.5) {
+             if (ameise.getY() + 1 < feld.length) {
+             ameise.setY(ameise.getY() + 1);
+             } else {
+             ameise.setY(ameise.getY() - 1);
+             }
+             } else if (ameise.getY() - 1 >= 0) {
+             ameise.setY(ameise.getY() - 1);
+             } else {
+             ameise.setY(ameise.getY() + 1);
+             }
+             */
         }
 
     }
 
     private void nachHause(Ameise ameise) {
-        Random r = new Random();
-        if (r.nextInt(2) >= 0.5 && ameise.getX() != nestPosition[0]) { // richtung x Koordinate
-            if (nestPosition[0] < ameise.getX()) {
-                ameise.setX(ameise.getX() - 1);
-            } else {
-                ameise.setX(ameise.getX() + 1);
+        int x = ameise.getX();
+        int y = ameise.getY();
+        boolean gefunden = false;
+        for (int i = ameise.getX() - 1; i <= ameise.getX() + 1; i++) { // 3 , da 3x3 Feld überprüft wird 
+            if (i >= 0 && i < feld.length) {
+                for (int j = ameise.getY() - 1; j <= ameise.getY() + 1; j++) {
+                    if (j >= 0 && j < feld.length) {
+
+                        /*if (feld[i][j].getDuftstoffEinheiten() > feld[x][y].getDuftstoffEinheiten() && feld[ameise.getX()][ameise.getY()].getDuftstoffEinheiten() <= 0) { // damit sich die Ameise auch in die richtige Richtung bewegt
+
+                         x = i;
+                         y = j;
+                         gefunden = true;
+                         } else if (feld[i][j].getDuftstoffEinheiten() < feld[x][y].getDuftstoffEinheiten()&& feld[i][j].getDuftstoffEinheiten() > 0 && feld[ameise.getX()][ameise.getY()].getDuftstoffEinheiten() > 0) {
+                         x = i;
+                         y = j;
+                         gefunden = true;
+                         }*/
+                        if (feld[i][j].getDuftstoffEinheiten() > 0 && feld[i][j] != feld[ameise.getX()][ameise.getY()]) { // damit sich die Ameise auch in die richtige Richtung bewegt
+                            if (feld[ameise.getX()][ameise.getY()].getDuftstoffEinheiten() <= 0) {
+                                x = i;
+                                y = j;
+                                gefunden = true;
+                            } else if (feld[i][j].getDuftstoffEinheiten() > feld[ameise.getX()][ameise.getY()].getDuftstoffEinheiten()) {
+                                x = i;
+                                y = j;
+                                gefunden = true;
+                            }
+
+                        }
+
+                    }
+                }
             }
-        } else if (ameise.getY() != nestPosition[1]) { // richtung y Koordinate
-            if (nestPosition[0] < ameise.getY()) {
-                ameise.setY(ameise.getY() - 1);
-            } else {
-                ameise.setY(ameise.getY() + 1);
+        }
+        if (gefunden) {
+            ameise.setX(x);
+            ameise.setY(y);
+        }
+        if (!gefunden) {
+            Random r = new Random();
+            if (r.nextInt(2) >= 0.5 && ameise.getX() != nestPosition[0]) { // richtung x Koordinate
+                if (nestPosition[0] < ameise.getX()) {
+                    ameise.setX(ameise.getX() - 1);
+                } else {
+                    ameise.setX(ameise.getX() + 1);
+                }
+            } else if (ameise.getY() != nestPosition[1]) { // richtung y Koordinate
+                if (nestPosition[0] < ameise.getY()) {
+                    ameise.setY(ameise.getY() - 1);
+                } else {
+                    ameise.setY(ameise.getY() + 1);
+                }
             }
+            duftstoffVerspruehen(feld[ameise.getX()][ameise.getY()]);
         }
     }
 
