@@ -149,7 +149,7 @@ public class Simulation {
 
                 if (zahl == 2 && ameise.getX() + 1 < feld.length) {
                     ameise.setX(ameise.getX() + 1);
-                } else if (ameise.getX() - 1 > 0) {
+                } else if (ameise.getX() - 1 >= 0) {
                     ameise.setX(ameise.getX() - 1);
                 }
 
@@ -157,7 +157,7 @@ public class Simulation {
 
                 if (zahl == 0 && ameise.getY() + 1 < feld.length) {
                     ameise.setY(ameise.getY() + 1);
-                } else if (ameise.getY() - 1 > 0) {
+                } else if (ameise.getY() - 1 >= 0) {
                     ameise.setY(ameise.getY() - 1);
                 }
 
