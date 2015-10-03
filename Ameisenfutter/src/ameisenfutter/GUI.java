@@ -110,7 +110,6 @@ public class GUI extends JPanel implements Runnable {
             s.los();
             mill = mill +(System.currentTimeMillis() - l);
             double xs = mill/runden;
-            //System.out.println(xs + " = " + mill + " / " + runden);
             runden++;
             try {
                 Thread.sleep(0);
