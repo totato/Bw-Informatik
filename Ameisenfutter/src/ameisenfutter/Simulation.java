@@ -192,6 +192,7 @@ public class Simulation {
         feld[ameise.getX()][ameise.getY()].futterportionAbziehen();
     }
 
+    
     private void futterAblegen(Ameise ameise) {
         ameise.setTraegtFutter(false);
         futterImNest++;
