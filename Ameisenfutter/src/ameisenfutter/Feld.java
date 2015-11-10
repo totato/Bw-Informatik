@@ -10,8 +10,7 @@ package ameisenfutter;
  * @author Vika
  */
 public class Feld {
-
-    private int X; //X-Koordinate des Feldes innerhalb des zweidimensionalen Arrays
+ private int X; //X-Koordinate des Feldes innerhalb des zweidimensionalen Arrays
     private int Y; //Y-Koordinate des Feldes innerhalb des zweidimensionalen Arrays
     private int DuftstoffEinheiten; // gibt an, mit wie viel Duftstoff ein Feld versehen wurde
     private int futterportion; // Anzahl der auf dem Feld liegenden Portion Futter
@@ -72,5 +71,4 @@ public class Feld {
     public void setNest(boolean nest) {
         this.nest = nest;
     }
-
 }

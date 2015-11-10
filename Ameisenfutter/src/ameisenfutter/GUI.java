@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -22,7 +23,7 @@ import javax.swing.JPanel;
  */
 public class GUI extends JPanel implements Runnable {
 
-    private static Simulation s;
+   private static Simulation s;
     private static int feldgroesse;
     private final int feldpxl = 2;
     private Thread t;
@@ -80,24 +81,26 @@ public class GUI extends JPanel implements Runnable {
         super.paintComponent(gr);
         gr.setColor(new Color(4, 176, 24));
         gr.fillRect(0, 0, feldgroesse, feldgroesse);
-        for (int i = 0; i < s.getFeld().length; i++) {
-            for (int j = 0; j < s.getFeld().length; j++) {
-                gr.setColor(new Color(255, 255, 255));
-                if (s.getFeld()[i][j].getDuftstoffEinheiten() > 0) {
-                    gr.fillRect(i * feldpxl, j * feldpxl, 2, 2);
-                }
-                gr.setColor(new Color(142, 116, 46));
-                if (s.getFeld()[i][j].getFutterportion() > 0) {
-                    gr.fillRect(i * feldpxl, j * feldpxl, 2, 2);
-                }
+HashMap< Integer, Feld> hm = s.getHm();
+        for (Integer pos : hm.keySet()) {
 
+            gr.setColor(new Color(255, 255, 255));
+            if (s.getHm().get(pos).getDuftstoffEinheiten() > 0) {
+                gr.fillRect(pos/feldgroesse * feldpxl, pos %feldgroesse * feldpxl, 2, 2);
             }
+            gr.setColor(new Color(142, 116, 46));
+            if (s.getHm().get(pos).getFutterportion() > 0) {
+
+                gr.fillRect(pos/feldgroesse * feldpxl, pos %feldgroesse * feldpxl, 2, 2);
+            }
+
         }
+
         for (int i = 0; i < s.getGesamtAmeisen(); i++) {
             gr.setColor(new Color(0, 0, 0));
-            gr.fillRect(s.getAmeisenKolonie()[i].getX() * feldpxl, s.getAmeisenKolonie()[i].getY() * feldpxl, 2, 2);
+            gr.fillRect(s.getAmeisenKolonie()[i].getX() * feldpxl, s.getAmeisenKolonie()[i].getY() * feldpxl, 2, 2);         
         }
-
+ 
     }
 
     @Override
@@ -108,11 +111,11 @@ public class GUI extends JPanel implements Runnable {
             long l = System.currentTimeMillis();
             repaint();
             s.los();
-            mill = mill +(System.currentTimeMillis() - l);
-            double xs = mill/runden;
+            mill = mill + (System.currentTimeMillis() - l);
+            double xs = mill / runden;
             runden++;
             try {
-                Thread.sleep(0);
+                Thread.sleep(10);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
