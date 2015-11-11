@@ -6,15 +6,18 @@ package ameisenfutter;
  */
 public class Ameise {
 
-    private boolean traegtFutter;
+   private boolean traegtFutter;
     private int x;
     private int y;
+    private int[][] moves = {{0,1,0,-1},{1,0,-1,0}};
 
-    public Ameise(boolean traegtFutter , int x , int y) {
+    public Ameise(boolean traegtFutter, int x, int y) {
         this.traegtFutter = false;
         this.x = x;
         this.y = y;
     }
+
+
 
     public boolean isTraegtFutter() {
         return traegtFutter;
@@ -39,6 +42,6 @@ public class Ameise {
     public void setY(int y) {
         this.y = y;
     }
-    
+
     
 }

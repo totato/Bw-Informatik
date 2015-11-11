@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  */
 public class GUI extends JPanel implements Runnable {
 
-   private static Simulation s;
+  private static Simulation s;
     private static int feldgroesse;
     private final int feldpxl = 2;
     private Thread t;
@@ -68,12 +68,14 @@ public class GUI extends JPanel implements Runnable {
         frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.add(this);
+        frame.pack();
         frame.setVisible(true);
-        frame.setResizable(false);
+        //frame.setResizable(false);
         setOpaque(false);
         setFocusable(true);
         t = new Thread(this);
         t.start();
+        
     }
 
     @Override
@@ -81,30 +83,49 @@ public class GUI extends JPanel implements Runnable {
         super.paintComponent(gr);
         gr.setColor(new Color(4, 176, 24));
         gr.fillRect(0, 0, feldgroesse, feldgroesse);
-HashMap< Integer, Feld> hm = s.getHm();
-        for (Integer pos : hm.keySet()) {
-
+        Feld[] f =s.getHm().values().toArray(new Feld[0]);
+        Integer[] key = s.getHm().keySet().toArray(new Integer[0]);
+       /* for (Integer pos : new HashSet<>(s.getHm().keySet())) {
+            int x = s.koordinatenBerrechnen(pos)[0];
+            int y = s.koordinatenBerrechnen(pos)[1];
             gr.setColor(new Color(255, 255, 255));
-            if (s.getHm().get(pos).getDuftstoffEinheiten() > 0) {
-                gr.fillRect(pos/feldgroesse * feldpxl, pos %feldgroesse * feldpxl, 2, 2);
+            if (!s.getHm().get(pos).getPheromones().isEmpty()) {
+                gr.fillRect(x * feldpxl, y * feldpxl, 2, 2);
             }
             gr.setColor(new Color(142, 116, 46));
             if (s.getHm().get(pos).getFutterportion() > 0) {
 
-                gr.fillRect(pos/feldgroesse * feldpxl, pos %feldgroesse * feldpxl, 2, 2);
+                gr.fillRect(x * feldpxl, y * feldpxl, 2, 2);
             }
 
-        }
+        }*/
+        for (int i = 0; i < f.length; i++) {
+            int pos = key[i];
+            int x = s.koordinatenBerrechnen(pos)[0];
+            int y = s.koordinatenBerrechnen(pos)[1];
+            gr.setColor(new Color(255, 255, 255));
+            if (!s.getHm().get(pos).getPheromones().isEmpty()) {
+                gr.fillRect(x * feldpxl, y * feldpxl, 2, 2);
+            }
+            gr.setColor(new Color(142, 116, 46));
+            if (s.getHm().get(pos).getFutterportion() > 0) {
 
+                gr.fillRect(x * feldpxl, y * feldpxl, 2, 2);
+            }
+            
+        }
+        gr.setColor(Color.red);
+        gr.fillRect(feldgroesse / 2, feldgroesse / 2, 2, 2);
         for (int i = 0; i < s.getGesamtAmeisen(); i++) {
             gr.setColor(new Color(0, 0, 0));
-            gr.fillRect(s.getAmeisenKolonie()[i].getX() * feldpxl, s.getAmeisenKolonie()[i].getY() * feldpxl, 2, 2);         
+            gr.fillRect(s.getAmeisenKolonie()[i].getX() * feldpxl, s.getAmeisenKolonie()[i].getY() * feldpxl, 2, 2);
         }
- 
+
     }
 
     @Override
     public void run() {
+        System.out.println("ja");
         int runden = 1;
         long mill = 0;
         while (true) {

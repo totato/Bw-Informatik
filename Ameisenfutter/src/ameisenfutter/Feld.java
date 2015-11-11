@@ -5,23 +5,23 @@
  */
 package ameisenfutter;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Vika
  */
 public class Feld {
- private int X; //X-Koordinate des Feldes innerhalb des zweidimensionalen Arrays
-    private int Y; //Y-Koordinate des Feldes innerhalb des zweidimensionalen Arrays
-    private int DuftstoffEinheiten; // gibt an, mit wie viel Duftstoff ein Feld versehen wurde
+ private ArrayList<Pheromon> pheromones;
+     private final int startIntensity = 400;
     private int futterportion; // Anzahl der auf dem Feld liegenden Portion Futter
     private boolean nest; // gibt an, ob es sich um das Nest der Ameisen handelt
 
     //Konstruktor der Klasse Feld
-    public Feld( int isDuftstoffVerspruet, int futterportion, boolean nest ) {
-        this.X = X;
-        this.Y = Y;
+    public Feld( ArrayList<Pheromon> pheromones, int futterportion, boolean nest ) {
         this.futterportion = futterportion;
-        this.DuftstoffEinheiten = isDuftstoffVerspruet;
+        this.pheromones = pheromones;
+        this.nest = nest;
     }
 
     /**
@@ -36,19 +36,12 @@ public class Feld {
             futterportion--;
         }
     }
-    
-    /**
-     * 
-     * 
-     */
-    public void versprueheDuft(){ // brauchen wir nicht
-        DuftstoffEinheiten = 10;
+
+    public ArrayList<Pheromon> getPheromones() {
+        return pheromones;
     }
 
-    public int getDuftstoffEinheiten() {
-        return DuftstoffEinheiten;
-    }
-
+ 
     public int getFutterportion() {
         return futterportion;
     }
@@ -57,9 +50,15 @@ public class Feld {
         return nest;
     }
 
-    public void setDuftstoffEinheiten(int DuftstoffEinheiten) {
-        this.DuftstoffEinheiten = DuftstoffEinheiten;
+    public void setPheromones(ArrayList<Pheromon> pheromones) {
+        this.pheromones = pheromones;
     }
+    public void addPheromon(){
+        pheromones.add(new Pheromon(startIntensity));
+    }
+
+   
+    
 
     public void setFutterportion(int futterportion) {
         this.futterportion = futterportion;
@@ -70,5 +69,13 @@ public class Feld {
 
     public void setNest(boolean nest) {
         this.nest = nest;
+    }
+    public void reducePheromones(){
+        for (int i = 0; i < pheromones.size(); i++) {
+             pheromones.get(i).reduceIntensity();
+            if(pheromones.get(i).getIntensity()<1){
+                pheromones.remove(i);
+            }
+        }
     }
 }
